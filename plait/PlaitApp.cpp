@@ -149,6 +149,37 @@ enum gate_pix_type {
   GP_MUXN = 0x16000000
 };
 
+extern const char* gate_pix;
+
+int make_gate_tex() {
+  uint8_t* pix = new uint8_t[256*256];
+
+  for (int map_y = 0; map_y < 16; map_y++) {
+    for (int map_x = 0; map_x < 16; map_x++) {
+      for (int box_y = 0; box_y < 16; box_y++) {
+        for (int box_x = 0; box_x < 16; box_x++) {
+          int glyph_index = (map_y * 16) + map_x;
+          if (glyph_index > 31) glyph_index = 31;
+
+          uint8_t c = gate_pix[glyph_index * 256 + box_y * 16 + box_x];
+          if      (c == '#') c = 0x00;
+          else if (c == '=') c = 0x80;
+          else               c = 0xFF;
+
+          int dst_x = (map_x * 16) + box_x;
+          int dst_y = (map_y * 16) + box_y;
+          pix[dst_y * 256 + dst_x] = c;
+        }
+      }
+    }
+  }
+
+  int gate_tex = create_texture_u8(256, 256, pix, false);
+
+  delete [] pix;
+  return gate_tex;
+}
+
 PlaitApp::PlaitApp() {
   auto& n2c = node_type_to_color;
 
@@ -225,8 +256,6 @@ void PlaitApp::paint_node(PlaitNode* node) {
       LOG_R("Could not pick a color for %s\n", node->plait_cell->gate());
     }
   }
-
-  //node->color = 0x00FFFFFF;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -244,6 +273,8 @@ void PlaitApp::app_init(int screen_w, int screen_h) {
   ui_text_painter.init();
   blitter.init();
   dump_painter.init_ascii();
+
+  box_painter.set_tex(make_gate_tex());
 
   check_gl_error();
 

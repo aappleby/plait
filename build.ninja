@@ -14,11 +14,14 @@ default_includes = -I. -Isymlinks -Isymlinks/MetroLib -Isymlinks/tree-sitter/lib
 ################################################################################
 # Libraries
 
-build symlinks/MetroLib/bin/metrolib/libappbase.a : run_command
+build obj/MetroLib : run_command
   command = ninja -C symlinks/MetroLib
 
-build symlinks/MetroLib/bin/metrolib/libcore.a : run_command
-  command = ninja -C symlinks/MetroLib
+#build symlinks/MetroLib/bin/metrolib/libappbase.a : run_command
+#  command = ninja -C symlinks/MetroLib
+#
+#build symlinks/MetroLib/bin/metrolib/libcore.a : run_command
+#  command = ninja -C symlinks/MetroLib
 
 build obj/glad/glad.o          : compile_cpp symlinks/MetroLib/metrolib/glad/glad.c
 
@@ -40,6 +43,7 @@ build obj/plait/CellDB.o   : compile_cpp plait/CellDB.cpp
 build obj/plait/Plait.o    : compile_cpp plait/Plait.cpp
 build obj/plait/PlaitApp.o : compile_cpp plait/PlaitApp.cpp
 build obj/plait/PTree.o    : compile_cpp plait/PTree.cpp
+build obj/plait/GatePix.o  : compile_cpp plait/GatePix.cpp
 
 build bin/Plait : link $
   obj/glad/glad.o $
@@ -47,6 +51,7 @@ build bin/Plait : link $
   obj/plait/PlaitApp.o $
   obj/plait/PTree.o $
   obj/plait/CellDB.o $
+  obj/plait/GatePix.o $
   obj/imgui/imgui.o $
   obj/imgui/imgui_demo.o $
   obj/imgui/imgui_draw.o $
@@ -56,5 +61,6 @@ build bin/Plait : link $
   obj/tree-sitter/parser.o $
   obj/tree-sitter/scanner.o $
   symlinks/MetroLib/bin/metrolib/libappbase.a $
-  symlinks/MetroLib/bin/metrolib/libcore.a
+  symlinks/MetroLib/bin/metrolib/libcore.a $
+  | obj/MetroLib
   libs=-lSDL2
