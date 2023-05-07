@@ -1,10 +1,4 @@
 # Plait
-An interactive visualization tool for GateBoy's logic gate schematic.
-
-
-The tool Plait (described below) parses the GateBoy source code to verify that all tagged lines are internally consistent.
-
-# What's Plait?
 
 ![Plait screenshot](images/plait.png "Plait screenshot")
 
