@@ -1,0 +1,60 @@
+include rules.ninja
+
+################################################################################
+# Config
+
+build_mode   = -DCONFIG_DEBUG -O0
+#build_mode   = -DCONFIG_RELEASE -O3
+#build_mode   = -DCONFIG_FASTMODE -O3
+
+default_gpp      = g++ -g -MMD -std=gnu++2a
+default_gcc      = gcc -g -MMD
+default_includes = -I. -Isymlinks/MetroLib -Isymlinks/tree-sitter/lib/include
+
+################################################################################
+# Libraries
+
+build symlinks/MetroLib/bin/metrolib/libappbase.a : run_command
+  command = ninja -C symlinks/MetroLib
+
+build symlinks/MetroLib/bin/metrolib/libcore.a : run_command
+  command = ninja -C symlinks/MetroLib
+
+build obj/glad/glad.o          : compile_cpp symlinks/MetroLib/metrolib/glad/glad.c
+
+build obj/imgui/imgui.o         : compile_cpp symlinks/imgui/imgui.cpp
+build obj/imgui/imgui_demo.o    : compile_cpp symlinks/imgui/imgui_demo.cpp
+build obj/imgui/imgui_draw.o    : compile_cpp symlinks/imgui/imgui_draw.cpp
+build obj/imgui/imgui_tables.o  : compile_cpp symlinks/imgui/imgui_tables.cpp
+build obj/imgui/imgui_widgets.o : compile_cpp symlinks/imgui/imgui_widgets.cpp
+
+build obj/tree-sitter/lib.o     : compile_c symlinks/tree-sitter/lib/src/lib.c
+
+build obj/tree-sitter/parser.o  : compile_c symlinks/tree-sitter-cpp/src/parser.c
+build obj/tree-sitter/scanner.o : compile_c symlinks/tree-sitter-cpp/src/scanner.cc
+
+################################################################################
+# Plait
+
+build obj/plait/CellDB.o   : compile_cpp plait/CellDB.cpp
+build obj/plait/Plait.o    : compile_cpp plait/Plait.cpp
+build obj/plait/PlaitApp.o : compile_cpp plait/PlaitApp.cpp
+build obj/plait/PTree.o    : compile_cpp plait/PTree.cpp
+
+build bin/Plait : link $
+  obj/glad/glad.o $
+  obj/plait/Plait.o $
+  obj/plait/PlaitApp.o $
+  obj/plait/PTree.o $
+  obj/plait/CellDB.o $
+  obj/imgui/imgui.o $
+  obj/imgui/imgui_demo.o $
+  obj/imgui/imgui_draw.o $
+  obj/imgui/imgui_tables.o $
+  obj/imgui/imgui_widgets.o $
+  obj/tree-sitter/lib.o $
+  obj/tree-sitter/parser.o $
+  obj/tree-sitter/scanner.o $
+  symlinks/MetroLib/bin/metrolib/libappbase.a $
+  symlinks/MetroLib/bin/metrolib/libcore.a
+  libs=-lSDL2
