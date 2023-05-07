@@ -9,7 +9,7 @@ build_mode   = -DCONFIG_DEBUG -O0
 
 default_gpp      = g++ -g -MMD -std=gnu++2a
 default_gcc      = gcc -g -MMD
-default_includes = -I. -Isymlinks/MetroLib -Isymlinks/tree-sitter/lib/include
+default_includes = -I. -Isymlinks -Isymlinks/MetroLib -Isymlinks/tree-sitter/lib/include
 
 ################################################################################
 # Libraries

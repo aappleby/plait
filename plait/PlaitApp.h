@@ -11,8 +11,8 @@
 
 //#include "metrolib/core/Debug.h"
 
-#include "Plait/Plait.h"
-#include "Plait/CellDB.h"
+#include "plait/Plait.h"
+#include "plait/CellDB.h"
 
 #include <functional>
 

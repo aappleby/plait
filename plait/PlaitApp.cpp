@@ -1,4 +1,4 @@
-#include "Plait/PlaitApp.h"
+#include "plait/PlaitApp.h"
 
 #include "metrolib/appbase/AppHost.h"
 #include "metrolib/appbase/DummyApp.h"
@@ -7,7 +7,7 @@
 #include "metrolib/core/Constants.h"
 #include "metrolib/core/Utils.h"
 #include "imgui/imgui.h"
-#include "Plait/CellDB.h"
+#include "plait/CellDB.h"
 
 #include <algorithm>
 #include <deque>

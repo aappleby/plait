@@ -1,4 +1,4 @@
-#include "Plait/Plait.h"
+#include "plait/Plait.h"
 
 #include <fstream>
 
@@ -44,7 +44,7 @@ void to_json(nlohmann::json& j, const PlaitFrame* plait_frame) {
   j["text"]  = plait_frame->text;
   j["pos_x"] = plait_frame->pos.x;
   j["pos_y"] = plait_frame->pos.y;
-  j["size_x"] = plait_frame->size.x; 
+  j["size_x"] = plait_frame->size.x;
   j["size_y"] = plait_frame->size.y;
   j["color_r"] = plait_frame->color.r;
   j["color_g"] = plait_frame->color.g;
