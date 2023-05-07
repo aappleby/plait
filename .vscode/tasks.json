@@ -5,7 +5,6 @@
       "type": "shell",
       "label": "build_plait",
       "command": "ninja",
-      "args": ["bin/Plait"],
       "problemMatcher": "$gcc",
       "group": {
         "kind": "build",
