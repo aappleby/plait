@@ -3,7 +3,7 @@
   "tasks": [
     {
       "type": "shell",
-      "label": "build_plait",
+      "label": "build_all",
       "command": "ninja",
       "problemMatcher": "$gcc",
       "group": {

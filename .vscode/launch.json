@@ -3,7 +3,7 @@
   "configurations": [
     {
       "name": "Plait",
-      "preLaunchTask": "build_plait",
+      "preLaunchTask": "build_all",
       "type": "cppdbg",
       "request": "launch",
       "program": "${workspaceFolder}/bin/Plait",
