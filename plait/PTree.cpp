@@ -5,9 +5,7 @@
 
 using namespace std;
 
-extern "C" {
-  extern const TSLanguage *tree_sitter_cpp();
-}
+#if 0
 
 PTree::PTree(const char* filename) {
   load_blob(filename, src_blob);
@@ -65,3 +63,4 @@ int PTree::count_comments() const {
 
   return total;
 }
+#endif

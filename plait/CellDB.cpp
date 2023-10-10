@@ -564,6 +564,7 @@ bool DieDB::parse_dir(const std::string& path) {
 //-----------------------------------------------------------------------------
 
 std::string lhs_to_identifier(PNode node, const char* src) {
+#if 0
   if (node.is_identifier()) {
     auto name = node.body(src);
     return trim_name(name);
@@ -576,11 +577,14 @@ std::string lhs_to_identifier(PNode node, const char* src) {
     CHECK_P(false);
     return "";
   }
+#endif
+  return "";
 }
 
 //-----------------------------------------------------------------------------
 
 std::string argument_to_identifier(PNode node, const char* src) {
+#if 0
   if (node.is_identifier()) {
     auto name = node.body(src);
     //trim_oldnew(name);
@@ -602,17 +606,23 @@ std::string argument_to_identifier(PNode node, const char* src) {
 		CHECK_P(false);
 		return "";
 	}
+#endif
+  return "";
 }
 
 //-----------------------------------------------------------------------------
 
 std::vector<std::string> arglist_to_args(PNode node, const char* src) {
+#if 0
 	CHECK_P(node.is_arglist());
 	std::vector<std::string> arg_names;
 	for (int i = 0; i < node.named_child_count(); i++) {
 		arg_names.push_back(argument_to_identifier(node.named_child(i), src));
 	}
 	return arg_names;
+#endif
+  std::vector<std::string> result;
+  return result;
 }
 
 //-----------------------------------------------------------------------------
@@ -623,6 +633,7 @@ static regex bus_tag(R"(\/\*(.)()(BUS_\w+) *\*\/)");
 static regex cell_tag(R"(\/\*(.)(p[0-9]{2})\.([A-Z]{4}) *\*\/)");
 
 bool DieDB::parse_header(const std::string& header_path) {
+#if 0
   LOG_G("%s\n", header_path.c_str());
   LOG_INDENT_SCOPE();
 
@@ -751,7 +762,7 @@ bool DieDB::parse_header(const std::string& header_path) {
   }
 
   LOG_B("%d tags found\n", tag_count);
-
+#endif
   return true;
 }
 
@@ -759,6 +770,7 @@ bool DieDB::parse_header(const std::string& header_path) {
 // The qualified_identifier node has a bug... "name" field pointing to "::"
 
 bool DieDB::parse_source(const std::string& source_path) {
+#if 0
   LOG_G("%s\n", source_path.c_str());
   LOG_INDENT_SCOPE();
 
@@ -908,6 +920,7 @@ bool DieDB::parse_source(const std::string& source_path) {
   LOG_B("%d tags found\n", tag_count);
 
   total_files++;
+#endif
   return true;
 }
 

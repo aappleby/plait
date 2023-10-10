@@ -9,21 +9,18 @@ build_mode   = -DCONFIG_DEBUG -O0
 
 default_gpp      = g++ -g -MMD -std=gnu++2a
 default_gcc      = gcc -g -MMD
-default_includes = -I. -Isymlinks -Isymlinks/MetroLib
+default_includes = -I. -Isymlinks -Isymlinks/metrolib
 
 ################################################################################
 # Libraries
 
-build obj/MetroLib : run_command
-  command = ninja -C symlinks/MetroLib
+build symlinks/metrolib/bin/metrolib/libappbase.a : run_command
+  command = ninja -C symlinks/metrolib
 
-#build symlinks/MetroLib/bin/metrolib/libappbase.a : run_command
-#  command = ninja -C symlinks/MetroLib
-#
-#build symlinks/MetroLib/bin/metrolib/libcore.a : run_command
-#  command = ninja -C symlinks/MetroLib
+build symlinks/metrolib/bin/metrolib/libcore.a : run_command
+  command = ninja -C symlinks/metrolib
 
-build obj/glad/glad.o          : compile_cpp symlinks/MetroLib/metrolib/glad/glad.c
+build obj/glad/glad.o           : compile_cpp symlinks/glad/glad.c
 
 build obj/imgui/imgui.o         : compile_cpp symlinks/imgui/imgui.cpp
 build obj/imgui/imgui_demo.o    : compile_cpp symlinks/imgui/imgui_demo.cpp
@@ -52,7 +49,6 @@ build bin/Plait : link $
   obj/imgui/imgui_draw.o $
   obj/imgui/imgui_tables.o $
   obj/imgui/imgui_widgets.o $
-  symlinks/MetroLib/bin/metrolib/libappbase.a $
-  symlinks/MetroLib/bin/metrolib/libcore.a $
-  | obj/MetroLib
+  symlinks/metrolib/bin/metrolib/libappbase.a $
+  symlinks/metrolib/bin/metrolib/libcore.a
   libs=-lSDL2

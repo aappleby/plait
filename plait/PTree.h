@@ -1,7 +1,5 @@
 #pragma once
 
-#include "tree-sitter/lib/include/tree_sitter/api.h"
-
 #include <deque>
 #include <string>
 #include <span>
@@ -12,32 +10,14 @@
 
 typedef std::span<const char> cspan;
 
-//-----------------------------------------------------------------------------
+struct PNode {
+  bool is_identifier() const { return false; }
+};
 
-/*
-uint32_t ts_node_start_byte(TSNode);
-TSPoint ts_node_start_point(TSNode);
-uint32_t ts_node_end_byte(TSNode);
-TSPoint ts_node_end_point(TSNode);
+struct PTree {
+};
 
-char *ts_node_string(TSNode);
-
-TSNode ts_node_named_child(TSNode, uint32_t);
-uint32_t ts_node_named_child_count(TSNode);
-
-TSNode ts_node_child_by_field_name(TSNode self, const char *field_name, uint32_t
-field_name_length); TSNode ts_node_child_by_field_id(TSNode, TSFieldId);
-
-TSNode ts_node_first_child_for_byte(TSNode, uint32_t);
-TSNode ts_node_first_named_child_for_byte(TSNode, uint32_t);
-
-TSNode ts_node_descendant_for_byte_range(TSNode, uint32_t, uint32_t);
-TSNode ts_node_descendant_for_point_range(TSNode, TSPoint, TSPoint);
-TSNode ts_node_named_descendant_for_byte_range(TSNode, uint32_t, uint32_t);
-TSNode ts_node_named_descendant_for_point_range(TSNode, TSPoint, TSPoint);
-*/
-
-//-----------------------------------------------------------------------------
+#if 0//-----------------------------------------------------------------------------
 
 struct PNode : public TSNode {
   PNode(const TSNode& b) : TSNode(b) {}
@@ -207,3 +187,4 @@ struct PTree {
 };
 
 //-----------------------------------------------------------------------------
+#endif
