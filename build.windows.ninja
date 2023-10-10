@@ -12,7 +12,6 @@ build bin/Plait : link $
   bin/CoreLib.a $
   bin/AppLib.a $
   bin/imgui.a $
-  bin/TreeSitter.a $
   obj/glad.o $
   obj/Plait/Plait.o $
   obj/Plait/PlaitApp.o $

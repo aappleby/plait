@@ -9,7 +9,7 @@ build_mode   = -DCONFIG_DEBUG -O0
 
 default_gpp      = g++ -g -MMD -std=gnu++2a
 default_gcc      = gcc -g -MMD
-default_includes = -I. -Isymlinks -Isymlinks/MetroLib -Isymlinks/tree-sitter/lib/include
+default_includes = -I. -Isymlinks -Isymlinks/MetroLib
 
 ################################################################################
 # Libraries
@@ -30,11 +30,6 @@ build obj/imgui/imgui_demo.o    : compile_cpp symlinks/imgui/imgui_demo.cpp
 build obj/imgui/imgui_draw.o    : compile_cpp symlinks/imgui/imgui_draw.cpp
 build obj/imgui/imgui_tables.o  : compile_cpp symlinks/imgui/imgui_tables.cpp
 build obj/imgui/imgui_widgets.o : compile_cpp symlinks/imgui/imgui_widgets.cpp
-
-build obj/tree-sitter/lib.o     : compile_c symlinks/tree-sitter/lib/src/lib.c
-
-build obj/tree-sitter/parser.o  : compile_c symlinks/tree-sitter-cpp/src/parser.c
-build obj/tree-sitter/scanner.o : compile_c symlinks/tree-sitter-cpp/src/scanner.cc
 
 ################################################################################
 # Plait
@@ -57,9 +52,6 @@ build bin/Plait : link $
   obj/imgui/imgui_draw.o $
   obj/imgui/imgui_tables.o $
   obj/imgui/imgui_widgets.o $
-  obj/tree-sitter/lib.o $
-  obj/tree-sitter/parser.o $
-  obj/tree-sitter/scanner.o $
   symlinks/MetroLib/bin/metrolib/libappbase.a $
   symlinks/MetroLib/bin/metrolib/libcore.a $
   | obj/MetroLib
