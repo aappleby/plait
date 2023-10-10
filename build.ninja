@@ -1,15 +1,13 @@
-include rules.ninja
+target=DEBUG
+#target=RELEASE
 
-################################################################################
-# Config
+toolchain=x86_64-linux-gnu
 
-build_mode   = -DCONFIG_DEBUG -O0
-#build_mode   = -DCONFIG_RELEASE -O3
-#build_mode   = -DCONFIG_FASTMODE -O3
+includes = ${includes} -Isymlinks/metrolib
 
-default_gpp      = g++ -g -MMD -std=gnu++2a
-default_gcc      = gcc -g -MMD
-default_includes = -I. -Isymlinks -Isymlinks/metrolib
+include symlinks/metrolib/ninja/config_ALL.ninja
+include symlinks/metrolib/ninja/config_${target}.ninja
+include symlinks/metrolib/ninja/rules.ninja
 
 ################################################################################
 # Libraries
@@ -37,7 +35,7 @@ build obj/plait/PlaitApp.o : compile_cpp plait/PlaitApp.cpp
 build obj/plait/PTree.o    : compile_cpp plait/PTree.cpp
 build obj/plait/GatePix.o  : compile_cpp plait/GatePix.cpp
 
-build bin/Plait : link $
+build bin/Plait : c_binary $
   obj/glad/glad.o $
   obj/plait/Plait.o $
   obj/plait/PlaitApp.o $
@@ -51,4 +49,4 @@ build bin/Plait : link $
   obj/imgui/imgui_widgets.o $
   symlinks/metrolib/bin/metrolib/libappbase.a $
   symlinks/metrolib/bin/metrolib/libcore.a
-  libs=-lSDL2
+  libraries=-lSDL2
