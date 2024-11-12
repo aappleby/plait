@@ -2,7 +2,7 @@
 
 #include "metrolib/appbase/Viewport.h"
 #include "plait/CellDB.h"
-#include "glm/glm/glm.hpp"
+#include "third_party/glm/glm/glm.hpp"
 #include "json/single_include/nlohmann/json.hpp"
 #include "metrolib/core/Utils.h"
 
