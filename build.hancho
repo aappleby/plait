@@ -1,0 +1,62 @@
+hancho.base_rules = hancho.repo("{hancho_dir}/base_rules.hancho")
+
+hancho.metrolib = hancho.repo("{repo_dir}/symlinks/metrolib/build.hancho")
+hancho.glad     = hancho.repo("{repo_dir}/symlinks/third_party/glad.hancho")
+hancho.imgui    = hancho.repo("{repo_dir}/symlinks/third_party/imgui.hancho")
+
+hancho.config.includes = [
+    "{repo_dir}",
+    "{repo_dir}/symlinks",
+    "{repo_dir}/symlinks/metrolib",
+]
+
+libplait = hancho(
+    hancho.base_rules.cpp_lib,
+    in_srcs = [
+        "plait/CellDB.cpp",
+        "plait/Plait.cpp",
+        "plait/PlaitApp.cpp",
+        "plait/PTree.cpp",
+        "plait/GatePix.cpp",
+    ],
+    out_lib = "plait/libplait.a"
+)
+
+plait_app = hancho(
+    hancho.base_rules.cpp_bin,
+    in_libs = [
+        libplait,
+        hancho.metrolib.libappbase,
+        hancho.metrolib.libcore,
+        hancho.glad.lib,
+        hancho.imgui.lib,
+    ],
+    sys_libs = ["-lSDL2"],
+    out_bin = "plait_app"
+
+)
+
+#################################################################################
+## Plait
+#
+#build obj/plait/CellDB.o   : compile_cpp plait/CellDB.cpp
+#build obj/plait/Plait.o    : compile_cpp plait/Plait.cpp
+#build obj/plait/PlaitApp.o : compile_cpp plait/PlaitApp.cpp
+#build obj/plait/PTree.o    : compile_cpp plait/PTree.cpp
+#build obj/plait/GatePix.o  : compile_cpp plait/GatePix.cpp
+#
+#build bin/Plait : c_binary $
+#  obj/glad/glad.o $
+#  obj/plait/Plait.o $
+#  obj/plait/PlaitApp.o $
+#  obj/plait/PTree.o $
+#  obj/plait/CellDB.o $
+#  obj/plait/GatePix.o $
+#  obj/imgui/imgui.o $
+#  obj/imgui/imgui_demo.o $
+#  obj/imgui/imgui_draw.o $
+#  obj/imgui/imgui_tables.o $
+#  obj/imgui/imgui_widgets.o $
+#  symlinks/metrolib/bin/metrolib/libappbase.a $
+#  symlinks/metrolib/bin/metrolib/libcore.a
+#  libraries=-lSDL2

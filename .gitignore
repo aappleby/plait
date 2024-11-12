@@ -1,5 +1,2 @@
-.ninja_deps
-.ninja_log
-bin
-obj
+build
 imgui.ini
