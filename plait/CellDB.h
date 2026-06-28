@@ -9,7 +9,7 @@
 #include <map>
 #include <iostream>
 
-#include "plait/PTree.h"
+#include "PTree.h"
 
 enum class DieCellType {
   UNKNOWN = 0,

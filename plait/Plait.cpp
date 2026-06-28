@@ -1,4 +1,4 @@
-#include "plait/Plait.h"
+#include "Plait.h"
 
 #include <fstream>
 

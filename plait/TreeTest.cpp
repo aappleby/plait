@@ -2,8 +2,8 @@
 #include <string.h>
 #include <stdio.h>
 #include "metrolib/core/File.h"
-#include "plait/PTree.h"
-#include "plait/CellDB.h"
+#include "PTree.h"
+#include "CellDB.h"
 
 #pragma warning(disable:4267)
 
